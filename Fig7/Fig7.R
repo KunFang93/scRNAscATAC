@@ -209,53 +209,43 @@ cohort2_avg <- construct_exprs(exprs_cohort2_combined, pdata_cohort2,
                                PT_refPhi_obj, RT_refPhi_obj)
 plotheatmap(pdata_cohort2,cohort2_avg$PT,cohort2_avg$RT,sortmean = T)
 
-# Sotiriou_Christos
-exprs_cohort3 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/Sotiriou_Christos/Sotiriou_Christos.xlsx',
+
+# LoiGeneProfilingBCaTam
+exprs_cohort3 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/LoiGeneProfilingBCaTam/LoiGeneProfilingBCaTam.xlsx',
                             sheet = "Expression_matrix") 
-pdata_cohort3 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/Sotiriou_Christos/Sotiriou_Christos.xlsx',
+pdata_cohort3 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/LoiGeneProfilingBCaTam/LoiGeneProfilingBCaTam.xlsx',
                             sheet = "Process_Pdata")
-exprs_cohort3_combined <- build_combined_exprs(exprs_cohort3,"Gene Symbol")
+exprs_cohort3_combined <- build_combined_exprs(exprs_cohort3,"symbol")
 pdata_cohort3 <- pdata_cohort3 %>% drop_na(rfs)
+pdata_cohort3$geo_accession <- pdata_cohort3$samplename
 cohort3_avg <- construct_exprs(exprs_cohort3_combined, pdata_cohort3,
                                PT_refPhi_obj, RT_refPhi_obj)
 plotheatmap(pdata_cohort3,cohort3_avg$PT,cohort3_avg$RT,sortmean = T)
 
-# LoiGeneProfilingBCaTam
-exprs_cohort4 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/LoiGeneProfilingBCaTam/LoiGeneProfilingBCaTam.xlsx',
+# NagallaInteractionImmunitySubtypeBRCA
+exprs_cohort4 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/NagallaInteractionImmunitySubtypeBRCA/NagallaInteractionImmunitySubtypeBRCA.xlsx',
                             sheet = "Expression_matrix") 
-pdata_cohort4 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/LoiGeneProfilingBCaTam/LoiGeneProfilingBCaTam.xlsx',
+pdata_cohort4 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/NagallaInteractionImmunitySubtypeBRCA/NagallaInteractionImmunitySubtypeBRCA.xlsx',
                             sheet = "Process_Pdata")
-exprs_cohort4_combined <- build_combined_exprs(exprs_cohort4,"symbol")
-pdata_cohort4 <- pdata_cohort4 %>% drop_na(rfs)
-pdata_cohort4$geo_accession <- pdata_cohort4$samplename
+exprs_cohort4_combined <- build_combined_exprs(exprs_cohort5,"Gene Symbol")
+pdata_cohort4 <- pdata_cohort4 %>% drop_na(dfs)
+pdata_cohort4$rfs <- pdata_cohort4$dfs
 cohort4_avg <- construct_exprs(exprs_cohort4_combined, pdata_cohort4,
                                PT_refPhi_obj, RT_refPhi_obj)
 plotheatmap(pdata_cohort4,cohort4_avg$PT,cohort4_avg$RT,sortmean = T)
 
-# NagallaInteractionImmunitySubtypeBRCA
-exprs_cohort5 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/NagallaInteractionImmunitySubtypeBRCA/NagallaInteractionImmunitySubtypeBRCA.xlsx',
+
+# ChinAberrationBRcAPathophysiologies
+exprs_cohort5 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/ChinAberrationBRcAPathophysiologies/ChinAberrationBRcAPathophysiologies.xlsx',
                             sheet = "Expression_matrix") 
-pdata_cohort5 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/NagallaInteractionImmunitySubtypeBRCA/NagallaInteractionImmunitySubtypeBRCA.xlsx',
+pdata_cohort5 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/ChinAberrationBRcAPathophysiologies/ChinAberrationBRcAPathophysiologies.xlsx',
                             sheet = "Process_Pdata")
+exprs_cohort5<-exprs_cohort5[ , colSums(is.na(exprs_cohort5)) == 0]
 exprs_cohort5_combined <- build_combined_exprs(exprs_cohort5,"Gene Symbol")
-pdata_cohort5 <- pdata_cohort5 %>% drop_na(dfs)
-pdata_cohort5$rfs <- pdata_cohort5$dfs
+pdata_cohort5 <- pdata_cohort5 %>% drop_na(rfs)
+
+pdata_cohort5 <- pdata_cohort5[pdata_cohort5$geo_accession %in% colnames(exprs_cohort5),]
 cohort5_avg <- construct_exprs(exprs_cohort5_combined, pdata_cohort5,
                                PT_refPhi_obj, RT_refPhi_obj)
 plotheatmap(pdata_cohort5,cohort5_avg$PT,cohort5_avg$RT,sortmean = T)
-
-
-# ChinAberrationBRcAPathophysiologies
-exprs_cohort6 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/ChinAberrationBRcAPathophysiologies/ChinAberrationBRcAPathophysiologies.xlsx',
-                            sheet = "Expression_matrix") 
-pdata_cohort6 <- read_excel('/Users/kfang/Documents/lab/Jin_lab/BRCA_cohort/ChinAberrationBRcAPathophysiologies/ChinAberrationBRcAPathophysiologies.xlsx',
-                            sheet = "Process_Pdata")
-exprs_cohort6<-exprs_cohort6[ , colSums(is.na(exprs_cohort6)) == 0]
-exprs_cohort6_combined <- build_combined_exprs(exprs_cohort6,"Gene Symbol")
-pdata_cohort6 <- pdata_cohort6 %>% drop_na(rfs)
-
-pdata_cohort6 <- pdata_cohort6[pdata_cohort6$geo_accession %in% colnames(exprs_cohort6),]
-cohort6_avg <- construct_exprs(exprs_cohort6_combined, pdata_cohort6,
-                               PT_refPhi_obj, RT_refPhi_obj)
-plotheatmap(pdata_cohort6,cohort6_avg$PT,cohort6_avg$RT,sortmean = T)
 
