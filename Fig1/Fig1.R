@@ -83,7 +83,7 @@ for (obj in seurat_list){
   # perform QC
   obj.filt <- subset(obj, subset = nFeature_RNA <= nfeature.upcut & nFeature_RNA > nfeature.upcut/20)
   obj.filt <- subset(obj.filt, subset = nCount_RNA <= ncount.upcut & nCount_RNA > ncount.upcut/20)
-  obj.filt <- subset(obj.filt, subset = percent.mt <= min(permt.upcut,25) & percent.mt > permt.upcut/20)
+  obj.filt <- subset(obj.filt, subset = percent.mt <= min(permt.upcut,25))
   obj.filt <- subset(obj.filt, subset = scDblFinder.class %in% c('singlet'))
   Idents(obj.filt) <- names(seurat_list)[count]
   # visualize again
